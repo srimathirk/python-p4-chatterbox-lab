@@ -63,8 +63,9 @@ def messages_by_id(id):
             )
             return response
         elif request.method == 'PATCH':
-            for attr in request.form:
-                setattr(message,attr,request.form.get(attr))
+            # for attr in request.form:
+            #     setattr(message,attr,request.form.get(attr))
+            message.body = request.get_json()["body"]
             db.session.add(message)
             db.session.commit()
             message_dict = message.to_dict()
